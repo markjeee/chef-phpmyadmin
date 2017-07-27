@@ -23,8 +23,6 @@ require 'digest/sha1'
 # PHP Recipe includes we already know PHPMyAdmin needs
 if node['phpmyadmin']['stand_alone'] then
 	include_recipe 'php'
-	include_recipe 'php::module_mbstring'
-	include_recipe 'php::module_mcrypt'
 	include_recipe 'php::module_gd'
 	include_recipe 'php::module_mysql'
 
@@ -133,9 +131,7 @@ if (node['phpmyadmin'].attribute?('fpm') && node['phpmyadmin']['fpm'])
 	  min_spare_servers 2
 	  max_spare_servers 8
 	  max_children 8
-	  terminate_timeout (node['php']['ini_settings']['max_execution_time'].to_i + 20)
-	  value_overrides({
-	    :error_log => "#{node['php']['fpm_log_dir']}/phpmyadmin.log"
-	  })
+	  terminate_timeout node['phpmyadmin']['php']['fpm']['terminate_timeout']
+	  value_overrides({ :error_log => '%s/phpmyadmin.log' % node['php']['fpm_log_dir'] })
 	end
 end

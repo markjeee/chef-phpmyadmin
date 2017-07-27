@@ -36,12 +36,13 @@ end
 
 case node['platform_family']
 when 'debian'
-  default['phpmyadmin']['upload_dir'] = '/var/lib/php5/uploads'
-  default['phpmyadmin']['save_dir'] = '/var/lib/php5/uploads'
+  default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
+  default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
 when 'rhel'
   default['phpmyadmin']['upload_dir'] = '/var/lib/php/uploads'
   default['phpmyadmin']['save_dir'] = '/var/lib/php/uploads'
 end
+
 default['phpmyadmin']['maxrows'] = 100
 default['phpmyadmin']['protect_binary'] = 'blob'
 default['phpmyadmin']['default_lang'] = 'en'
@@ -54,4 +55,3 @@ default['phpmyadmin']['config_template_cookbook'] = 'phpmyadmin'
 
 default['phpmyadmin']['check_config_permissions'] = true
 default['phpmyadmin']['force_ssl'] = false
-
